@@ -28,7 +28,29 @@ public class Main extends Container implements Xlet {
     public void startXlet() {
         setVisible(true);
         scene.setVisible(true);
-        repaint();
+
+        float milis = 0.0f;
+        long lastTime = System.currentTimeMillis();
+        while(true) {
+            if(milis >= (1.0f / 60.0f)) {
+                milis = 0.0f;
+
+
+                // INPUT
+
+
+                // UPDATE
+
+
+
+                //x++;
+                // Render
+                repaint();
+                lastTime = System.currentTimeMillis();
+            }
+            milis += (System.currentTimeMillis() - lastTime) / 1000.0f;
+
+        }
     }
 
     public void pauseXlet() {
