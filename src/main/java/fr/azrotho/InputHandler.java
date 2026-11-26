@@ -1,9 +1,11 @@
 package fr.azrotho;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import org.dvb.event.UserEvent;
+import org.dvb.event.UserEventListener;
 
-public class InputHandler implements KeyListener {
+import java.awt.event.KeyEvent;
+
+public class InputHandler implements UserEventListener {
 
     public Main main;
 
@@ -11,13 +13,13 @@ public class InputHandler implements KeyListener {
         this.main = main;
     }
 
-    public void keyTyped(KeyEvent keyEvent) {
-        keyEvent.consume();
-    }
+    public void userEventReceived(UserEvent userEvent) {
+        if (userEvent == null || userEvent.getType() != KeyEvent.KEY_PRESSED) {
+            return;
+        }
 
-    public void keyPressed(KeyEvent keyEvent) {
-        System.out.println("Key pressed: " + keyEvent.getKeyCode());
-        switch(keyEvent.getKeyCode()) {
+        System.out.println("Key pressed: " + userEvent.getCode());
+        switch (userEvent.getCode()) {
             case KeyEvent.VK_UP:
                 main.Barre1Y -= 10.0f;
                 break;
@@ -31,11 +33,5 @@ public class InputHandler implements KeyListener {
                 main.Barre2Y += 10.0f;
                 break;
         }
-
-        keyEvent.consume();
-    }
-
-    public void keyReleased(KeyEvent keyEvent) {
-        keyEvent.consume();
     }
 }
